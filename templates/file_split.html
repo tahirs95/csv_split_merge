@@ -30,24 +30,24 @@
             <div class="row">
                 <div class="form-group text-center mt-4" style="margin:0 auto;">
                     <label for="exampleFormControlFile1 "><strong> Header Rows:</strong></label>
-                    <input type="number" name="header" class="form-control" required>
+                    <input type="number" name="header" class="form-control" min="1" max="10" required>
                 <p class="mt-1"> Copy header rows into each file.</p>  
                 </div>
             </div>
             <div class="row">
                 <div class="form-group text-center mt-4" style="margin:0 auto;">
                     <label for="exampleFormControlFile1 "><strong> Skip Rows:</strong></label>
-                    <input type="number" name="skip" class="form-control" required>
+                    <input type="number" name="skip" class="form-control" min="0" max="1000" required>
                 <p class="mt-1">Skip a number of rows at <br>the beginning of the file.</p>  
                 </div>
             </div>
             <div class="row mt-5">
                 <ul class="nav nav-tabs" role="tablist" style="margin: 0 auto;">
                     <li class="nav-item">
-                      <a class="nav-link active" data-toggle="tab" href="#home">Lines</a>
+                      <a class="nav-link active" data-toggle="tab" href="#home" onclick="home()">Lines</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" data-toggle="tab" href="#menu1">Number of Files</a>
+                      <a class="nav-link" data-toggle="tab" href="#menu1" onclick="files()">Number of Files</a>
                     </li>
                   </ul>
                 
@@ -57,7 +57,7 @@
                 <div class="tab-pane row active" id="home" >
                     <div class="form-group text-center col-3 mt-4"  style="margin:0 auto;">
                         <label for="exampleFormControlFile1 "><strong> Limit (lines):</strong></label>
-                        <input type="number" name="lines" class="form-control" >
+                        <input type="number" name="lines" class="form-control" id="lines" min="1" max="1000" required>
                     <p class="mt-1"> Number of lines per file.<br>Each line is counted separately, even if it is part of a single record. All lines that are part of a single record will be written to the same file.
                     </p>  
                     </div>
@@ -65,7 +65,7 @@
                 <div class=" tab-pane row fade " id="menu1">
                     <div class="form-group text-center col-3 mt-4" style="margin:0 auto;">
                         <label for="exampleFormControlFile1 "><strong> Limit (Number of files):</strong></label>
-                        <input type="number" name="files" class="form-control" >
+                        <input type="number" name="files" class="form-control" min="1" max="50" id="files" >
                     <p class="mt-1"> Number of files to split into.</p>  
                     </div>
                 </div>
@@ -78,5 +78,15 @@
         </div>
         </div>
   </div>
+  <script>
+    function home(){
+      document.getElementById("lines").required = true
+      document.getElementById("files").required = false
+    }
+    function files(){
+      document.getElementById("lines").required = false
+      document.getElementById("files").required = true
+    }
+    </script>
   </body>
   </html>

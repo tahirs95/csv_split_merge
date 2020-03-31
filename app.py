@@ -24,7 +24,14 @@ def split_processing():
         csv_file = request.files['file']
         df = pd.read_csv(csv_file)
         header_rows = int(request.form['header'])
+        header = df.iloc[0:header_rows-1]
         skip = int(request.form['skip'])
+        numbers = []
+        for i in range(0, skip):
+            numbers.append(i)
+        print(numbers)
+
+        df = df.drop(df.index[numbers])
         if request.form['lines'] == '':
             pass
         else:
@@ -47,7 +54,6 @@ def split_processing():
                 filenames.append(filename)
                 df.to_csv(filename_path, header=True, index=None)
         else:
-            header = df.iloc[0:header_rows-1]
             for i, df in enumerate(list_of_dfs):
                 data = header.append(df, ignore_index=True)
                 id = uuid.uuid1()
