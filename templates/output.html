@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>File Split</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        {% if filenames|length > 0 %}
+        <h2 class="text-center">Your Files Are Ready</h2>
+        {% for file in filenames %}
+        {% if filenames|length > 1 %}
+        <div class="row"> 
+        <div class="col-sm-12 text-center">
+        <a href="{{file}}" download="report_{{loop.index}}.csv" class="btn btn-outline-success btn-lg mt-5 " style="margin:0 auto;"><i class="fa fa-download"></i> File {{loop.index}}</a> 
+    </div>
+</div>
+        {% else %}
+        <div class="row"> 
+            <div class="col-sm-12 text-center">    
+        <a href="{{file}}" download="report.csv" class="btn btn-outline-success btn-lg mt-5" style="margin:0 auto;"><i class="fa fa-download"></i> File</a> 
+            </div>
+            </div>
+        {% endif %}
+         {% endfor %}
+     {% endif %}
+     {% if message %}
+     <h2 class="text-center font-weight-bold">{{message}}</h2>
+     {% endif %}
+    </div>
+</body>
+
+</html>
