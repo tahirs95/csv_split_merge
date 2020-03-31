@@ -61,14 +61,13 @@ def split_processing():
                 filename_path = os.path.join(folder, "split_{}.csv".format(id))
                 filenames.append(filename)
                 data.to_csv(filename_path, header=True, index=None)
-        print(filenames)
-    return render_template("output.html", filenames=filenames)
+    name = csv_file.filename[:-4]
+    return render_template("output.html", filenames=filenames, name=name)
 
 @app.route("/merge_processing", methods=['GET', 'POST'])
 def merge_processing():
     if request.method == "POST":
         csv_files = request.files
-        print(csv_files)
         df_list = []
         folder = os.path.join(os.getcwd(), 'static')
         for file in csv_files.values():
